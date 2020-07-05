@@ -1,19 +1,26 @@
-# epic/release-**ブランチが作成されたら発火
+# github APIエンドポイントにPOSTすることで発火
+# 発火後は空のcommitを追加してPRを作成する
 on:
-  create:
-    branches:
-      - epic/release-**
+  repository_dispatch:
+    types: event_type
 
-job:
+jobs:
   createPullRequest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Update dependencies
+        run: |
+          git config --local user.name ssabcire
+          git config --local user.email qasw4554@gmail.com
+          git commit --allow-empty -m "first commit"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: test
           title: "Epic/release 202006w2"
+          branch: epic/release_07
+          base: master
           body: |
             # Summary
             This PR is 202006w2 of release branch.

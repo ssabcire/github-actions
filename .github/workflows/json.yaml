@@ -1,0 +1,13 @@
+name: Pull Request echos
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  history:
+    name: echo json
+    runs-on: ubuntu-latest
+    steps:
+      - name: dump context
+        run: echo '${{ toJSON(github.event) }}'
