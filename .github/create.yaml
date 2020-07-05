@@ -1,0 +1,21 @@
+# epic/release-**ブランチが作成されたら発火
+on:
+  create:
+    branches:
+      - epic/release-**
+
+job:
+  createPullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Epic/release 202006w2"
+          body: |
+            # Summary
+            This PR is 202006w2 of release branch.
+            # PR title and number
+          # labels: Weekly Release
