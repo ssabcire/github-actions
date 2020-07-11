@@ -4,11 +4,11 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-  jobs:
+jobs:
   history:
     name: Pull Request Body
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request.head.ref, 'epic/release')
+    if: contains(github.event.pull_request.head.ref, 'epic/release')
     steps:
       - name: Pull Request Body
         uses: technote-space/pr-commit-body-action@v1
