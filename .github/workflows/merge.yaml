@@ -1,0 +1,25 @@
+name: trigger with merge
+
+on:
+  pull_request:
+    types: closed
+    branches:
+      - master
+
+jobs:
+  createPullRequest:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.head.ref, 'release/')
+    steps:
+      - name: checkout master
+        uses: actions/checkout@v2
+      - name: checkout develop
+        uses: actions/checkout@v2
+        with:
+          ref: develop
+      - name: merge to master
+        run: |
+          git config --global user.email "qasw4554@gmail.com"
+          git config --global user.name "ssab"
+          git merge origin/master
+          git push origin develop

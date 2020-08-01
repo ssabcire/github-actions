@@ -1,4 +1,4 @@
-name: Pull Request echos
+name: PR INFO echo
 
 on:
   pull_request:
