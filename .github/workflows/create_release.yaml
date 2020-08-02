@@ -24,8 +24,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ TAG }}
-          release_name: Release ${{ TAG }}
+          tag_name: ${{ env.TAG }}
+          release_name: Release ${{ env.TAG }}
           body: ${{ github.event.pull_request.body }}
           draft: true
           prerelease: false
