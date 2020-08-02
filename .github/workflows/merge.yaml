@@ -11,15 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && contains(github.event.pull_request.head.ref, 'release/')
     steps:
-      - name: checkout master
+      - name: checkout repository to ubuntu
         uses: actions/checkout@v2
-      - name: checkout develop
+
+      - name: checkout to develop
         uses: actions/checkout@v2
         with:
           ref: develop
-      - name: merge to master
+
+      - name: merge master to develop
         run: |
           git config --global user.email "qasw4554@gmail.com"
           git config --global user.name "ssab"
           git merge --allow-unrelated-histories origin/master
           git push origin develop
+
+      - name: dump context
+        run: echo '${{ toJSON(github.event) }}'
