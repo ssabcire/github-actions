@@ -1,0 +1,33 @@
+name: create release automatically
+
+on:
+  pull_request:
+    types: closed
+    branches:
+      - master
+
+jobs:
+  CreateRelease:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.head.ref, 'release/')
+    env:
+      TAG2: $(echo ${{ github.event.pull_request.head.ref }} | awk -F'/' '{print $2}')
+    steps:
+      - name: print tag
+        run: echo ${TAG2}
+
+      - name: get tag
+        run: echo ::set-env name=TAG::$(echo ${{ github.event.pull_request.head.ref }} | awk -F'/' '{print $2}')
+      - name: print tag
+        run: echo ${TAG}
+        # - name: Create Release
+      #   uses: actions/create-release@v1
+      #   # env:
+      #   #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     # ここで、tag_name: github.event.pull_request.head.ref の文字列からrelease or hotfixを取り除きたい
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     body: github.event.pull_request.body
+      #     draft: true
+      #     prerelease: false
