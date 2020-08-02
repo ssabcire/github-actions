@@ -16,6 +16,9 @@ jobs:
       - name: print tag
         run: echo ${TAG}
 
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Create Release
         uses: actions/create-release@v1
         env:
