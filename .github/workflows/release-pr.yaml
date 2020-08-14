@@ -19,7 +19,7 @@ jobs:
           ruby-version: 2.6.x
 
       - name: Setup vars
-        run: echo "::set-output name=BRANCH_NAME::${{ github.event.pull_request.head.ref }}
+        run: echo "::set-output name=BRANCH_NAME::${{ github.event.ref }}
 
       - name: Creates a release pull request
         env:
