@@ -1,8 +1,7 @@
 name: PR INFO echo
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  create
 
 jobs:
   history:
