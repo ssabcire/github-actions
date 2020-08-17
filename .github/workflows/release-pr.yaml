@@ -3,7 +3,7 @@ name: Create Release PR
 on:
   create:
     branches:
-      - 'release/v*'
+      - 'release/*'
 
 jobs:
   create-release-pr:
