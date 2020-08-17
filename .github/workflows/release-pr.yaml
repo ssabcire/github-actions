@@ -3,7 +3,7 @@ name: Create Release PR
 on:
   create:
     branches:
-      - release/v**
+      - 'release/v*'
 
 jobs:
   create-release-pr:
@@ -22,7 +22,6 @@ jobs:
         env:
           GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_PR_RELEASE_BRANCH_STAGING: ${{ github.event.ref }}
-          GIT_PR_RELEASE_TITLE: Release ${{ github.event.ref }}
         run: |
           gem install -N git-pr-release -v "1.4.0"
           git-pr-release --no-fetch
